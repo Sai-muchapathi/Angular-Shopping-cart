@@ -1,0 +1,23 @@
+/* src/app/navbar/navbar.component.css */
+
+nav {
+  background-color: #333;
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
