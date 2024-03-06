@@ -1,0 +1,27 @@
+<form #userForm="ngForm" (ngSubmit)="submitForm()">
+  <h1>You are one step away, register now to continue</h1>
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="userData.name" required>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="userData.email" required>
+  </div>
+
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" [(ngModel)]="userData.age" required>
+  </div>
+
+  <button type="submit">Submit</button>
+  <button>Cancel</button>
+</form>
+
+<div *ngIf="submitted">
+  <h2>Form submitted successfully!</h2>
+  <p>Name: {{ userData.name }}</p>
+  <p>Email: {{ userData.email }}</p>
+  <p>Age: {{ userData.age }}</p>
+</div>
