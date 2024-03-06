@@ -1,8 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {HomeService} from "./home.service";
 import {RouterLink} from "@angular/router";
-import {JsonPipe, NgIf} from "@angular/common";
+import {JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 
+interface ApiResponse {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  }
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,13 +21,15 @@ import {JsonPipe, NgIf} from "@angular/common";
   imports: [
     RouterLink,
     NgIf,
-    JsonPipe
+    JsonPipe,
+    NgForOf,
+    NgOptimizedImage
   ],
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
 
-  data: any;
+  data: ApiResponse[] = [];
 
   constructor(private homeService: HomeService) {
   }
@@ -26,10 +39,9 @@ export class HomeComponent implements OnInit {
 
   fetchData() {
     this.homeService.fetchData().subscribe({
-      next: (response) => {
-        this.data = response;
-      }
-      ,
+        next: (response: ApiResponse[]) => {
+          this.data = response;
+        },
       error: (err) => {
         console.log("Error occurred!!!", err);
       }

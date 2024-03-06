@@ -6,9 +6,18 @@
     <li><a routerLink="/contact">Contact</a></li>
   </ul>
 </nav>
-<body>
-  <div *ngIf="data">
-    <h2>Data from external faker API</h2>
-    <pre>{{data | json}}</pre>
+
+<div class="container">
+  <div class="row" *ngFor="let record of data as dataArray; let i = index">
+      <div class="box">
+        <img alt="" [src]="record.image" style="max-width: 100%; max-height: 50%; align-self: center"/>
+        <h3>{{ record.title }}</h3>
+        <p>{{ record.description }}</p>
+        <button>Add to cart</button>
+        <button>Wishlist</button>
+      </div>
   </div>
-</body>
+</div>
+
+
+

@@ -1,4 +1,34 @@
-/* src/app/navbar/navbar.component.css */
+.container {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.box {
+  border-radius: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 350px;
+  height: 500px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.row {
+  margin: 20px;
+}
+
+button {
+  background-color: green;
+  border-radius: 5px;
+  margin: 3px;
+  color: white;
+}
 
 nav {
   background-color: #333;
@@ -12,7 +42,7 @@ ul {
 }
 
 li {
-  display: inline;
+  display: inline-block;
   margin-right: 10px;
 }
 
