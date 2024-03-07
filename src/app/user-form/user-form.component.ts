@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user-form',
@@ -12,19 +13,33 @@ import {NgIf} from "@angular/common";
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
+  buttonClicked: string | undefined;
+  //submitted: boolean = false;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    // Accessing route information in the ngOnInit lifecycle hook
+    const urlSegments = this.route.snapshot.url;
+    if (urlSegments.length > 0) {
+      this.buttonClicked = urlSegments[urlSegments.length - 1].path;
+      this.buttonClicked === 'signup' ? this.submitFormSignup() : this.submitFormLogin();
+    }
+  }
+
   userData = {
     name: '',
     email: '',
-    age: 0
+    age: 0,
+    password: ''
   };
 
-  submitted = false;
+  submitFormSignup() {
+    //this.submitted = true;
+  }
 
-  submitForm() {
-    this.submitted = true;
-    console.log(this.userData.name);
-    console.log(this.userData.email);
-    console.log(this.userData.age);
+  submitFormLogin() {
+    //this.submitted = true;
   }
 }

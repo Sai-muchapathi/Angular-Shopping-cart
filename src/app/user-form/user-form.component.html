@@ -1,4 +1,4 @@
-<form #userForm="ngForm" (ngSubmit)="submitForm()">
+<form *ngIf="buttonClicked === 'signup'" #userFormSignup="ngForm" (ngSubmit)="submitFormSignup()">
   <h1>You are one step away, register now to continue</h1>
   <div>
     <label for="name">Name:</label>
@@ -6,8 +6,8 @@
   </div>
 
   <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="userData.email" required>
+    <label for="signup-email">Email:</label>
+    <input type="email" id="signup-email" name="email" [(ngModel)]="userData.email" required>
   </div>
 
   <div>
@@ -19,9 +19,32 @@
   <button>Cancel</button>
 </form>
 
-<div *ngIf="submitted">
-  <h2>Form submitted successfully!</h2>
-  <p>Name: {{ userData.name }}</p>
-  <p>Email: {{ userData.email }}</p>
-  <p>Age: {{ userData.age }}</p>
-</div>
+<form *ngIf="buttonClicked === 'login'" #userFormLogin="ngForm" (ngSubmit)="submitFormLogin()">
+  <h1>You are one step away, register now to continue</h1>
+  <div>
+    <label for="login-email">Email:</label>
+    <input type="email" id="login-email" name="email" [(ngModel)]="userData.email" required>
+  </div>
+  <div>
+    <label for="password">password:</label>
+    <input type="password" id="password" name="email" [(ngModel)]="userData.password" required>
+  </div>
+  <button type="submit">Login</button>
+  <button>Cancel</button>
+</form>
+
+<!--<div *ngIf="submitted">-->
+<!--  <h2>Form submitted successfully!</h2>-->
+<!--  <p>Name: {{ userData.name }}</p>-->
+<!--  <p>Email: {{ userData.email }}</p>-->
+<!--  <p>Age: {{ userData.age }}</p>-->
+<!--</div>-->
+
+<!--<div *ngIf="!submitted">-->
+<!--  <h2>Form submitted successfully!</h2>-->
+<!--  <p>Name: {{ userData.name }}</p>-->
+<!--  <p>Email: {{ userData.email }}</p>-->
+<!--  <p>Age: {{ userData.age }}</p>-->
+<!--</div>-->
+
+
