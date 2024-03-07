@@ -12,7 +12,9 @@ interface ApiResponse {
   rating: {
     rate: number;
     count: number;
-  }
+  };
+  showFullText: boolean;
+  truncatedText: string;
 }
 @Component({
   selector: 'app-home',
@@ -30,8 +32,6 @@ interface ApiResponse {
 export class HomeComponent implements OnInit {
 
   data: ApiResponse[] = [];
-  truncatedText: string = '';
-  showFullText: boolean = false;
   maxLength: number = 100;
 
   constructor(private homeService: HomeService) {}
@@ -43,8 +43,11 @@ export class HomeComponent implements OnInit {
   fetchData() {
     this.homeService.fetchData().subscribe({
         next: (response: ApiResponse[]) => {
-          this.data = response;
-          this.truncateText();
+          this.data = response.map(record => ({
+            ...record,
+            showFullText:false,
+            truncatedText: this.truncateText(record.description)
+        }));
         },
       error: (err) => {
         console.log("Error occurred!!!", err);
@@ -52,15 +55,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  toggleReadMore(): void {
-    this.showFullText = !this.showFullText;
+  toggleReadMore(record: ApiResponse): void {
+    record.showFullText = !record.showFullText;
   }
 
-  truncateText(): void {
-    if (this.data.length > 0 && this.data[0].description.length > this.maxLength) {
-      this.truncatedText = this.data[0].description.substring(0, this.maxLength) + '...';
+  truncateText(text:string): string {
+    if (text.length > this.maxLength) {
+      return text.substring(0, this.maxLength) + '...';
     } else {
-      this.truncatedText = this.data[0].description;
+      return text;
     }
   }
 }
