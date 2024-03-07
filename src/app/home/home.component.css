@@ -29,3 +29,9 @@ button {
   margin: 3px;
   color: white;
 }
+
+a {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}

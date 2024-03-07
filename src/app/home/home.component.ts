@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HomeService} from "./home.service";
 import {RouterLink} from "@angular/router";
 import {JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
@@ -30,9 +30,12 @@ interface ApiResponse {
 export class HomeComponent implements OnInit {
 
   data: ApiResponse[] = [];
+  truncatedText: string = '';
+  showFullText: boolean = false;
+  maxLength: number = 100;
 
-  constructor(private homeService: HomeService) {
-  }
+  constructor(private homeService: HomeService) {}
+
   ngOnInit(): void {
     this.fetchData();
   }
@@ -41,10 +44,23 @@ export class HomeComponent implements OnInit {
     this.homeService.fetchData().subscribe({
         next: (response: ApiResponse[]) => {
           this.data = response;
+          this.truncateText();
         },
       error: (err) => {
         console.log("Error occurred!!!", err);
       }
     });
+  }
+
+  toggleReadMore(): void {
+    this.showFullText = !this.showFullText;
+  }
+
+  truncateText(): void {
+    if (this.data.length > 0 && this.data[0].description.length > this.maxLength) {
+      this.truncatedText = this.data[0].description.substring(0, this.maxLength) + '...';
+    } else {
+      this.truncatedText = this.data[0].description;
+    }
   }
 }

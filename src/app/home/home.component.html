@@ -1,11 +1,10 @@
-
-
 <div class="container">
   <div class="row" *ngFor="let record of data as dataArray; let i = index">
       <div class="box">
-        <img alt="" [src]="record.image" style="max-width: 100%; max-height: 50%; align-self: center"/>
+        <img alt="" [src]="record.image" style="max-width: 100%; max-height: 45%; align-self: center"/>
         <h3>{{ record.title }}</h3>
-        <p>{{ record.description }}</p>
+        <p [innerHTML]="showFullText ? record.description : truncatedText" style="display: inline-block;"></p>
+        <a *ngIf="!showFullText" (click)="toggleReadMore()">Read more</a>
         <button>Add to cart</button>
         <button>Wishlist</button>
       </div>
