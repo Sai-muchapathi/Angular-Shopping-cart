@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 interface Product {
-  // Define the properties of a product
   id: number,
   title: string,
   description: string,
@@ -36,6 +35,7 @@ export class FetchDataService {
     });
   }
 
+  // BehaviorSubject to let other components call this method
   getAllProducts(): BehaviorSubject<any[]> {
     return this.allProductsSubject;
   }

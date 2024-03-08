@@ -18,10 +18,14 @@ import {Observable} from "rxjs";
 export class UploadProductComponent implements OnInit {
   myForm: FormGroup = this.fb.group({});
   isSubmitted: boolean = false;
-  dropDownData$: Observable<string[]>; // Use Observable
 
+  // Use Observable
+  dropDownData$: Observable<string[]>;
+
+  // call the observable class
   constructor(private fb: FormBuilder, private fetchDataService: FetchDataService) {
-    this.dropDownData$ = this.fetchDataService.getCategories(); // Assign the observable
+    // Assign the observable
+    this.dropDownData$ = this.fetchDataService.getCategories();
   }
 
   ngOnInit(): void {
@@ -32,16 +36,12 @@ export class UploadProductComponent implements OnInit {
       image: ['', Validators.required]
     });
 
+    // fetching only the categories
     this.fetchDataService.getCategories();
   }
 
 
   onSubmit() {
     this.isSubmitted = true;
-    // if(!this.myForm.valid) {
-    //   if(this.myForm.title == ' ') {
-    //     console.log("Title missing");
-    //   }
-    // }
   }
 }

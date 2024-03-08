@@ -35,9 +35,11 @@ export class HomeComponent implements OnInit {
   data: ApiResponse[] = [];
   maxLength: number = 100;
 
+  // using FetchDataService class
   constructor(private homeService: FetchDataService) {}
 
   ngOnInit(): void {
+    // call fetchData to get all product details
     this.fetchData();
   }
 

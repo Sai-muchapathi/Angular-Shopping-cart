@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   constructor(private fetchDataService: FetchDataService) {}
 
   ngOnInit(): void {
+    // calling fetchData to get the data ready before main components load
     this.fetchDataService.fetchData();
   }
 }
