@@ -1,0 +1,30 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <label for="title">Title</label>
+  <input type="text" id="title" name="title" formControlName="title" required>
+  <div *ngIf="myForm.get('title')?.hasError('required') && isSubmitted">
+    Title is required
+  </div>
+
+  <label for="price">Price</label>
+  <input type="number" id="price" name="price" formControlName="price" required>
+  <div *ngIf="myForm.get('title')?.hasError('required') && isSubmitted">
+    Price is required
+  </div>
+
+  <label for="description">Description</label>
+  <input type="text" id="description" name="description" formControlName="description" required>
+  <div *ngIf="myForm.get('title')?.hasError('required') && isSubmitted">
+    Description is required
+  </div>
+  <!-- <label for="category">Category</label>
+  <input type="text" id="category" name="category" required> -->
+
+  <label for="image">Image</label>
+  <input type="file" id="image" name="image" formControlName="image" required accept="image/jpeg">
+  <div *ngIf="myForm.get('title')?.hasError('required') && isSubmitted">
+    Image is required
+  </div>
+
+  <br/>
+  <button type="submit">Submit</button>
+</form>
