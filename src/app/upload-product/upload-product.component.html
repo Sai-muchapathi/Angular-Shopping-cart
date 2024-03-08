@@ -16,8 +16,18 @@
   <div *ngIf="myForm.get('title')?.hasError('required') && isSubmitted">
     Description is required
   </div>
-  <!-- <label for="category">Category</label>
-  <input type="text" id="category" name="category" required> -->
+
+   <label for="category">Category</label>
+  <select id="category" formControlName="category">
+    <option value="" disabled selected>Select a category</option>
+    <option value="electronics"></option>
+    <option value="clothing">Clothing</option>
+    <option value="books">Books</option>
+    <!-- Add more options as needed -->
+  </select>
+  <div *ngIf="myForm.get('category')?.hasError('required') && isSubmitted">
+    select category
+  </div>
 
   <label for="image">Image</label>
   <input type="file" id="image" name="image" formControlName="image" required accept="image/jpeg">

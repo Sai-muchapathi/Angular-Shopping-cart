@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {map, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+
 interface Product {
   category: string;
 }
@@ -11,25 +12,28 @@ interface Product {
 export class HomeService {
 
   private url = "https://fakestoreapi.com/products";
+  private categoriesSubject = new BehaviorSubject<string[]>([]);
 
   constructor(private http: HttpClient) {
   }
 
-  fetchData(): Observable<any> {
-    return this.http
+  fetchData(): void {
+    this.http
       .get<Product[]>(this.url)
-      .pipe(
-        map((response: any[]) => {
-          const categories: string[] = [];
-          response.forEach(product => {
-            if (product.category && !categories.includes(product.category)) {
-              categories.push(product.category);
-            }
-          });
+      .subscribe((response: Product[]) => {
+        const categories: string[] = [];
 
-          console.log(categories);
-          return categories;
-        })
-      );
+        response.forEach(product => {
+          if (product.category && !categories.includes(product.category)) {
+            categories.push(product.category);
+          }
+        });
+
+        this.categoriesSubject.next(categories);
+      });
+  }
+
+  getCategories(): Observable<string[]> {
+    return this.categoriesSubject.asObservable();
   }
 }
