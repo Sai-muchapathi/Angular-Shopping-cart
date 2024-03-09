@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FetchDataService} from "../fetch-data/fetch-data.service";
 import {Observable} from "rxjs";
 
@@ -10,7 +10,9 @@ import {Observable} from "rxjs";
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    NgForOf,
+    AsyncPipe
   ],
   templateUrl: './upload-product.component.html',
   styleUrl: './upload-product.component.css'
@@ -32,6 +34,7 @@ export class UploadProductComponent implements OnInit {
     this.myForm = this.fb.group({
       title: ['', Validators.required],
       price: [null, Validators.required],
+      description: ['', Validators.required],
       category: [null, Validators.required],
       image: ['', Validators.required]
     });

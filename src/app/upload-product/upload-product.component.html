@@ -20,10 +20,7 @@
    <label for="category">Category</label>
   <select id="category" formControlName="category">
     <option value="" disabled selected>Select a category</option>
-    <option value="electronics"></option>
-    <option value="clothing">Clothing</option>
-    <option value="books">Books</option>
-    <!-- Add more options as needed -->
+    <option *ngFor="let category of dropDownData$ | async" [value]="category">{{ category }}</option>
   </select>
   <div *ngIf="myForm.get('category')?.hasError('required') && isSubmitted">
     select category
