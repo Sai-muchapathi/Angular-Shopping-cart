@@ -18,7 +18,8 @@ interface ApiResponse {
     lastname: string
   },
   phone: number,
-  __v: string
+  __v: string,
+  role: string
 }
 @Component({
   selector: 'app-user-data',
@@ -31,6 +32,7 @@ interface ApiResponse {
 })
 export class UserDataComponent {
   data: ApiResponse[] = [];
+  roles: string[] = ['admin', 'user', 'employee'];
 
 
   // using FetchUserDataService class
@@ -46,6 +48,7 @@ export class UserDataComponent {
       (response: ApiResponse[]) => {
         this.data = response.map(record => ({
           ...record,
+          role: this.getRandomRole()
         }));
 
       },
@@ -53,5 +56,10 @@ export class UserDataComponent {
         console.error("Error occurred!!!", error);
       }
     );
+  }
+
+  private getRandomRole() {
+    const randomIndex = Math.floor(Math.random() * this.roles.length);
+    return this.roles[randomIndex];
   }
 }
