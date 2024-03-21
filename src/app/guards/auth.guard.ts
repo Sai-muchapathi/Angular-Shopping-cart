@@ -1,9 +1,9 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {AuthService} from "../auth-service.service";
+import {AuthService} from "./auth-service.service";
 
 export const authGuard: CanActivateFn = (route, state) => {
-  if(inject(AuthService).isLoggedIn) {
+  if(inject(AuthService).isAdmin) {
     console.log('Success');
     return true;
   } else {

@@ -1,26 +1,7 @@
-import { Component } from '@angular/core';
-import {FetchUserDataService} from "../fetch-data/fetch-users.service";
+import {Component, OnInit} from '@angular/core';
+import {FetchUserDataService, User} from "../fetch-data/fetch-users.service";
 import {NgForOf} from "@angular/common";
-
-interface ApiResponse {
-  address: {
-    geolocation: {lat: string, long: string},
-    city: string,
-    street: string,
-    number: number,
-    zipcode: number
-  },
-  id: number,
-  email: string,
-  password: string,
-  name: {
-    firstname: string,
-    lastname: string
-  },
-  phone: number,
-  __v: string,
-  role: string
-}
+import {BehaviorSubject} from "rxjs";
 @Component({
   selector: 'app-user-data',
   standalone: true,
@@ -30,36 +11,21 @@ interface ApiResponse {
   templateUrl: './user-data.component.html',
   styleUrl: './user-data.component.css'
 })
-export class UserDataComponent {
-  data: ApiResponse[] = [];
-  roles: string[] = ['admin', 'user', 'employee'];
+export class UserDataComponent implements OnInit{
+  // Using BehaviorSubject to hold the user data
+  data: User[] = [];
 
-
-  // using FetchUserDataService class
   constructor(private userService: FetchUserDataService) {}
 
   ngOnInit(): void {
-    // call fetchUsersData to get all user details
+    // Call fetchUsersData to get all user details
     this.fetchUsersData();
   }
 
   fetchUsersData(): void {
-    this.userService.getAllUsers().subscribe(
-      (response: ApiResponse[]) => {
-        this.data = response.map(record => ({
-          ...record,
-          role: this.getRandomRole()
-        }));
-
-      },
-      (error) => {
-        console.error("Error occurred!!!", error);
-      }
-    );
-  }
-
-  private getRandomRole() {
-    const randomIndex = Math.floor(Math.random() * this.roles.length);
-    return this.roles[randomIndex];
+    // Subscribe to the BehaviorSubject to get the user data
+    this.userService.getAllUsers().subscribe(users => {
+      this.data = users;
+    });
   }
 }

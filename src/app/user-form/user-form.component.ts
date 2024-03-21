@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "../auth-service.service";
+import {AuthService} from "../guards/auth-service.service";
 
 @Component({
   selector: 'app-user-form',
@@ -16,7 +16,6 @@ import {AuthService} from "../auth-service.service";
 })
 export class UserFormComponent implements OnInit {
   buttonClicked: string | undefined;
-  //submitted: boolean = false;
 
   constructor(private authService: AuthService, private route: ActivatedRoute) {}
 
@@ -43,6 +42,7 @@ export class UserFormComponent implements OnInit {
     name: '',
     email: '',
     age: 0,
+    role: '',
     password: ''
   };
 
@@ -53,8 +53,9 @@ export class UserFormComponent implements OnInit {
 
   submitFormLogin() {
     console.log('Credentials submitted');
-    if(this.userData.email) {
-      this.authService.login();
+    if(this.userData) {
+      console.log(this.userData);
+      this.authService.login(this.userData);
     }
   }
 }
