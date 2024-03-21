@@ -4,6 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {UserFormComponent} from "./user-form/user-form.component";
 import {UploadProductComponent} from "./upload-product/upload-product.component";
 import {authGuard} from "./guards/auth.guard";
+import {UserDataComponent} from "./user-data/user-data.component";
 
 export const routes: Routes = [
   {path: 'contact',
@@ -19,10 +20,9 @@ export const routes: Routes = [
     path: 'user',
     loadChildren: () =>
       import('./user-form/user-form.module').then(u => u.UserFormModule)
-    // children: [
-    //   {path: 'signup', component: UserFormComponent},
-    //   {path: 'login', component: UserFormComponent},
-    // ]
+  },
+  {
+    path: 'user/data', component: UserDataComponent
   },
   {path: '', pathMatch: 'full', redirectTo: 'home'}
 ];

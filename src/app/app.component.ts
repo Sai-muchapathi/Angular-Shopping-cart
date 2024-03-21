@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {FetchDataService} from "./fetch-data/fetch-data.service";
+import {FetchUserDataService} from "./fetch-data/fetch-users.service";
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,11 @@ import {FetchDataService} from "./fetch-data/fetch-data.service";
 export class AppComponent implements OnInit{
   title = 'practice';
 
-  constructor(private fetchDataService: FetchDataService) {}
+  constructor(private fetchDataService: FetchDataService, private fetchUserService: FetchUserDataService) {}
 
   ngOnInit(): void {
     // calling fetchData to get the data ready before main components load
     this.fetchDataService.fetchData();
+    this.fetchUserService.fetchUsersData();
   }
 }

@@ -53,7 +53,7 @@ export class UserFormComponent implements OnInit {
 
   submitFormLogin() {
     console.log('Credentials submitted');
-    if(this.userData.email == 'sai') {
+    if(this.userData.email) {
       this.authService.login();
     }
   }

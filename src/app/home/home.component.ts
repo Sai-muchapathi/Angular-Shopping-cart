@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HomeService} from "./home.service";
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FetchDataService} from "../fetch-data/fetch-data.service";
