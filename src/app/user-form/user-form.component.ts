@@ -25,7 +25,17 @@ export class UserFormComponent implements OnInit {
     const urlSegments = this.route.snapshot.url;
     if (urlSegments.length > 0) {
       this.buttonClicked = urlSegments[urlSegments.length - 1].path;
-      this.buttonClicked === 'signup' ? this.submitFormSignup() : this.submitFormLogin();
+    }
+  }
+
+  onFormSubmit() {
+    console.log('Form submitted');
+    if (this.buttonClicked === 'signup') {
+      console.log('signup');
+      this.submitFormSignup();
+    } else if (this.buttonClicked === 'login') {
+      console.log('login');
+      this.submitFormLogin();
     }
   }
 
@@ -38,11 +48,12 @@ export class UserFormComponent implements OnInit {
 
   submitFormSignup() {
     //this.submitted = true;
+    console.log('Signup');
   }
 
   submitFormLogin() {
-    console.log('Inside Login');
-    if(this.userData.email) {
+    console.log('Credentials submitted');
+    if(this.userData.email == 'sai') {
       this.authService.login();
     }
   }

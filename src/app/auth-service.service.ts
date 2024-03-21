@@ -5,13 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   isLoggedIn = false;
-  //userRole = '';
 
   constructor() { }
 
   login() {
     this.isLoggedIn = true;
-    console.log('Logged in');
-    //this.userRole = 'admin';
+    console.log('Logged in check completed');
   }
 }
