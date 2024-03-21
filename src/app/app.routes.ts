@@ -9,12 +9,14 @@ import {UserDataComponent} from "./user-data/user-data.component";
 export const routes: Routes = [
   {path: 'contact',
     loadChildren: () =>
-    import('./contact/contact.module').then(m => m.ContactModule)
+    import('./contact/contact.module').then(m => m.ContactModule),
+    canActivate: [authGuard]
   },
   {path: 'home', component: HomeComponent, canActivate: [authGuard]},
   {path: 'addProduct',
     loadChildren: () =>
-      import('./upload-product/upload-product.module').then(u => u.UploadProductModule)
+      import('./upload-product/upload-product.module').then(u => u.UploadProductModule),
+    canActivate: [authGuard]
   },
   {
     path: 'user',
