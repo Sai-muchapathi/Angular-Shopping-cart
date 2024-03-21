@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../auth-service.service";
 
 @Component({
   selector: 'app-user-form',
@@ -17,7 +18,7 @@ export class UserFormComponent implements OnInit {
   buttonClicked: string | undefined;
   //submitted: boolean = false;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private authService: AuthService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     // Accessing route information in the ngOnInit lifecycle hook
@@ -40,6 +41,9 @@ export class UserFormComponent implements OnInit {
   }
 
   submitFormLogin() {
-    //this.submitted = true;
+    console.log('Inside Login');
+    if(this.userData.email) {
+      this.authService.login();
+    }
   }
 }

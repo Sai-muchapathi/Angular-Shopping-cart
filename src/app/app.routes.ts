@@ -3,13 +3,14 @@ import {ContactComponent} from "./contact/contact.component";
 import {HomeComponent} from "./home/home.component";
 import {UserFormComponent} from "./user-form/user-form.component";
 import {UploadProductComponent} from "./upload-product/upload-product.component";
+import {authGuard} from "./guards/auth.guard";
 
 export const routes: Routes = [
   {path: 'contact',
     loadChildren: () =>
     import('./contact/contact.module').then(m => m.ContactModule)
   },
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [authGuard]},
   {path: 'addProduct',
     loadChildren: () =>
       import('./upload-product/upload-product.module').then(u => u.UploadProductModule)
