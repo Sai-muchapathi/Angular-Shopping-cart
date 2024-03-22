@@ -1,6 +1,7 @@
-import {CanActivateFn, Router} from '@angular/router';
+import {CanActivateFn, CanDeactivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {AuthService} from "./auth-service.service";
+import {UserFormComponent} from "../user-form/user-form.component";
 
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
@@ -29,3 +30,12 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 };
+
+export const formDeactivateGuard: CanDeactivateFn<unknown> = (component:any, currentRoute, currentState, nextState) => {
+  if(component && component?.userData.email) {
+    return confirm('Are you sure want to exit the form?');
+  } else {
+    console.log("Form submitted");
+  }
+  return true;
+}

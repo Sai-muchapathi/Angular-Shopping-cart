@@ -15,7 +15,7 @@ export class AuthService {
       cred.password === userData.password);
     console.log("Role: ", user?.role);
     if(user){
-      console.log("User exists");
+      console.log("User exists")
       this.isAuthorised = true;
       this.isAdmin = user.role === 'admin';
     }

@@ -3,8 +3,9 @@ import {ContactComponent} from "./contact/contact.component";
 import {HomeComponent} from "./home/home.component";
 import {UserFormComponent} from "./user-form/user-form.component";
 import {UploadProductComponent} from "./upload-product/upload-product.component";
-import {authGuard} from "./guards/auth.guard";
+import {authGuard, formDeactivateGuard} from "./guards/auth.guard";
 import {UserDataComponent} from "./user-data/user-data.component";
+import {UserFormModule} from "./user-form/user-form.module";
 
 export const routes: Routes = [
   {path: 'contact',
@@ -21,7 +22,7 @@ export const routes: Routes = [
   {
     path: 'user',
     loadChildren: () =>
-      import('./user-form/user-form.module').then(u => u.UserFormModule)
+      import('./user-form/user-form.module').then(u => u.UserFormModule),
   },
   {
     path: 'user/data', component: UserDataComponent
