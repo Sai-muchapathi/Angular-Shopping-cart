@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 export interface User {
   address: {
@@ -31,13 +31,22 @@ export class FetchUserDataService {
 
   constructor(private http: HttpClient) {}
 
-  fetchUsersData(): void {
-    this.http.get<User[]>(this.url).subscribe((response: User[]) => {
-      const usersWithRoles = response.map(record => ({
-        ...record,
-        role: this.getRandomRole()
-      }));
-      this.allUsersSubject.next(usersWithRoles); // Corrected the placement of next()
+  fetchUsersData(): Promise<unknown> {
+    return new Promise<void>((resolve, reject) => {
+      try {
+        this.http.get<User[]>(this.url).subscribe((response: User[]) => {
+          const usersWithRoles = response.map(record => ({
+            ...record,
+            role: this.getRandomRole()
+          }));
+          this.allUsersSubject.next(usersWithRoles); // Corrected the placement of next()
+        });
+        console.log("Fetching completed");
+        resolve();
+      } catch (err) {
+        console.log("Error fetching the data");
+        reject();
+      }
     });
   }
 

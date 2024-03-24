@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FetchUserDataService, User} from "../fetch-data/fetch-users.service";
 import {NgForOf} from "@angular/common";
-import {BehaviorSubject} from "rxjs";
+import {DataResolver} from "../resolve/data-resolver";
 @Component({
   selector: 'app-user-data',
   standalone: true,
@@ -18,14 +18,6 @@ export class UserDataComponent implements OnInit{
   constructor(private userService: FetchUserDataService) {}
 
   ngOnInit(): void {
-    // Call fetchUsersData to get all user details
-    this.fetchUsersData();
-  }
 
-  fetchUsersData(): void {
-    // Subscribe to the BehaviorSubject to get the user data
-    this.userService.getAllUsers().subscribe(users => {
-      this.data = users;
-    });
   }
 }
