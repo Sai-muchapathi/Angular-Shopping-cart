@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private fetchUser: FetchUserDataService) { }
 
   login(userData: {email: string, password: string, role: string}) {
-    const allUsers = this.fetchUser.getAllUsers().getValue();
+    const allUsers = this.fetchUser.getAllUsers();
     const user = allUsers.find(cred => cred.email === userData.email &&
       cred.password === userData.password);
     console.log("Role: ", user?.role);
