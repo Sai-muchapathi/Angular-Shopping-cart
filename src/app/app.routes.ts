@@ -26,7 +26,7 @@ export const routes: Routes = [
       import('./user-form/user-form.module').then(u => u.UserFormModule),
   },
   {
-    path: 'user/data', component: UserDataComponent, resolve: {userService: DataResolver}
+    path: 'user/data', component: UserDataComponent, resolve: {resolvedData: DataResolver}
   },
   {path: '', pathMatch: 'full', redirectTo: 'home'}
 ];
