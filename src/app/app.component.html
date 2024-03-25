@@ -11,5 +11,9 @@
 </nav>
 <div class="container">
   <router-outlet></router-outlet>
+  // Display loader conditionally
+  <div class="overlay" *ngIf="showLoading">
+      <div class="loader"></div>
+  </div>
 </div>
 
